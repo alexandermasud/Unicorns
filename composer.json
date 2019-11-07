@@ -1,0 +1,15 @@
+{
+    "name": "alex/unicorns",
+    "description": "A simple PHP app that uses a unicorn API",
+    "require": {
+        "guzzlehttp/guzzle": "^6.4",
+        "monolog/monolog": "^1.25"
+    },
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Alexander Masud",
+            "email": "alexandermasud@protonmail.com"
+        }
+    ]
+}
