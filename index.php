@@ -5,6 +5,18 @@ use GuzzleHttp\Client;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
+// Tar id från URL
+$id = $_GET['id'];
+
+// Skapa en HTTP-client
+$client = new Client(['headers' => ['Accept' => 'application/json']]);
+
+// Anropar Unicorns api
+$res = $client->request('GET', 'http://unicorns.idioti.se/' . $id);
+
+// Omvandlar JSON-svar
+$data = json_decode($res->getBody(), true);
+
 ?>
 <!doctype html>
 <html lang="sv">
