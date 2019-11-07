@@ -67,7 +67,29 @@ $data = json_decode($res->getBody(), true);
                             <img src= " . $data['image'] . "  alt='Bild på " . $data['name'] . "' class='img-fluid'>
                         </div>
                     </div>";
-        } else {};
+        } else {
+
+            $idArray = array();
+            $nameArray = array();
+            $detailsArray = array();
+            foreach ($data as $item) {
+                array_push($idArray, $item['id']);
+                array_push($nameArray, $item['name']);
+                array_push($detailsArray, $item['details']);
+            };
+            echo "   
+                    <table class='table'>";
+            for ($i = 0; $i < count($data); ++$i) {
+                echo"
+                    <tbody>
+                    <tr>
+                    <td>$idArray[$i] : $nameArray[$i]</td>
+
+                    <td><a href='http://localhost/?id=$idArray[$i]' class='btn btn-light float-right'> Läs mer </a></td>
+                    </tr>
+                    </tbody>";
+            }
+        };
         echo "</table>";
         ?>
     </div>
