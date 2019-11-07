@@ -97,10 +97,9 @@ $logString = ' Requested info about: ';
                     </tr>
                     </tbody>";
             }
-        };
-
         // Writes line to log file
         $log->info($logString . 'all uncorns');
+        };
         echo "</table>";
         ?>
     </div>
