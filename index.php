@@ -5,20 +5,20 @@ use GuzzleHttp\Client;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-// Tar id från URL
+// Captures id from URL
 $id = $_GET['id'];
 
-// Skapa en HTTP-client
+// Creates http client
 $client = new Client(['headers' => ['Accept' => 'application/json']]);
 
-// Anropar Unicorns api
+// Calls Unicorns api
 $res = $client->request('GET', 'http://unicorns.idioti.se/' . $id);
 
-// Omvandlar JSON-svar
+// Converts JSON response
 $data = json_decode($res->getBody(), true);
 
 
-// Skapar logg som heter visits.log
+// Creates log file visits.log
 $log = new Logger('unicorns');
 $log->pushHandler(new StreamHandler('visits.log', Logger::INFO));
 $logString = ' Requested info about: ';
