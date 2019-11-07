@@ -17,6 +17,12 @@ $res = $client->request('GET', 'http://unicorns.idioti.se/' . $id);
 // Omvandlar JSON-svar
 $data = json_decode($res->getBody(), true);
 
+
+// Skapar logg som heter visits.log
+$log = new Logger('unicorns');
+$log->pushHandler(new StreamHandler('visits.log', Logger::INFO));
+$logString = ' Requested info about: ';
+
 ?>
 <!doctype html>
 <html lang="sv">
@@ -67,6 +73,8 @@ $data = json_decode($res->getBody(), true);
                             <img src= " . $data['image'] . "  alt='Bild på " . $data['name'] . "' class='img-fluid'>
                         </div>
                     </div>";
+        // Writes line to log file
+        $log->info($logString . $data['name']);
         } else {
 
             $idArray = array();
@@ -90,6 +98,9 @@ $data = json_decode($res->getBody(), true);
                     </tbody>";
             }
         };
+
+        // Writes line to log file
+        $log->info($logString . 'all uncorns');
         echo "</table>";
         ?>
     </div>
