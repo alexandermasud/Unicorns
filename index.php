@@ -14,12 +14,8 @@ $id = $_GET['id'];
 $client = new Client(['headers' => ['Accept' => 'application/json']]);
 
 // Calls Unicorns api
-if (isset($_GET['id'])) {
-    try {
-        $res = $client->request('GET', 'http://unicorns.idioti.se/' . $id, ['http_errors' => false]);
-     } catch (Error $e) {
-        echo 'Now you can catch me!';
-     }
+if (isset($_GET['id'])) {  
+    $res = $client->request('GET', 'http://unicorns.idioti.se/' . $id, ['http_errors' => false]);
 }
 else {
     $res = $client->request('GET', 'http://unicorns.idioti.se/');
