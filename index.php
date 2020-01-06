@@ -6,13 +6,20 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 // Captures id from URL
-$id = $_GET['id'];
 
+if (isset($_GET['id'])) {
+$id = $_GET['id'];
+};
 // Creates http client
 $client = new Client(['headers' => ['Accept' => 'application/json']]);
 
 // Calls Unicorns api
-$res = $client->request('GET', 'http://unicorns.idioti.se/' . $id);
+if (isset($_GET['id'])) {  
+    $res = $client->request('GET', 'http://unicorns.idioti.se/' . $id, ['http_errors' => false]);
+}
+else {
+    $res = $client->request('GET', 'http://unicorns.idioti.se/');
+}
 
 // Converts JSON response
 $data = json_decode($res->getBody(), true);
@@ -45,7 +52,7 @@ $logString = ' Requested info about: ';
             <div class="form-group row">
                 <label for="id" class="col-sm-2 col-form-label">id på enhörning</label>
                 <div class="col-10">
-                    <input type="number" class="form-control" id="id" name="id">
+                    <input type="number" class="form-control" id="id" name="id" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -93,7 +100,7 @@ $logString = ' Requested info about: ';
                     <tr>
                     <td>$idArray[$i] : $nameArray[$i]</td>
 
-                    <td><a href='http://localhost/?id=$idArray[$i]' class='btn btn-light float-right'> Läs mer </a></td>
+                    <td><a href='/?id=$idArray[$i]' class='btn btn-light float-right'> Läs mer </a></td>
                     </tr>
                     </tbody>";
             }
